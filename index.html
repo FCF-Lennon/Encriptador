@@ -5,40 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Encriptador</title>
+    <meta name="description" content="Encriptador y desencriptador de texto simple">
     <link rel="stylesheet" href="./Styles/normalize.css">
     <link rel="stylesheet" href="./Styles/style.css">
 </head>
 <body>
-        
-    <main class="contenedor__principal">
-        <a href="./index.html"><img  src="./Assets/Logo.png" alt="logotipo de alura latam"></a>
-        <section class="contenedor__principal__seccion__encriptar">
-            <textarea class="textarea__encriptar"  placeholder="Ingrese el texto aqui" rows="6"></textarea>
-            <div class="division__elementos__encriptados">
-                <p><img src="./Assets/Group.png" alt="Imagen de signo de exclamación"> Solo letras minúsculas y sin acentos</p>
-                <div class="division__botones__encriptado">
-                    <button class="button__encriptar">Encriptar</button>
-                    <button class="button__desencriptar">Desencriptar</button>
+    <div class="contenedor">
+        <main class="contenedor__principal">
+            <a href="./index.html"><img src="./Assets/Logo.png" alt="Logotipo de Alura Latam"></a>
+            <section class="contenedor__principal__seccion__encriptar" >
+                <textarea class="textarea__encriptar" placeholder="Ingrese el texto aquí" rows="6"></textarea>
+                <div class="division__elementos__encriptados">
+                    <p><img src="./Assets/Group.png" alt="Imagen de signo de exclamación"> Solo letras minúsculas y sin acentos</p>
+                    <div class="division__botones__encriptado">
+                        <button class="button__encriptar">Encriptar</button>
+                        <button class="button__desencriptar">Desencriptar</button>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <section class="contenedor__principal__seccion__desencriptar">
-            <div class="division__elementos__desencriptar" style="display: none;">
-                <img src="./Assets/Muneco.png" alt="Imagen de niño con una lupa">
-                <div class="division__titulo__parrafo__desencriptar" >
-                    <h1>Ningún mensaje fue encontrado</h1>
-                    <p>Ingresa el texto que deseas encriptar o desencriptar.</p>
+            </section>
+            <section class="contenedor__principal__seccion__desencriptar">
+                <div class="division__elementos__desencriptar" >
+                    <img src="./Assets/Muneco.png" alt="Imagen de niño con una lupa">
+                    <div class="division__titulo__parrafo__desencriptar">
+                        <h1>Ningún mensaje fue encontrado</h1>
+                        <p>Ingresa el texto que deseas encriptar o desencriptar.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="division__textarea__boton__desencriptar" >
-                <textarea class="textarea__desencriptar" name="desencriptar" rows=""></textarea>
-                <button class="button__copiar">Copiar</button>
-            </div>
-        </section>
-    </main>
-    <footer>
+                <div class="division__textarea__boton__desencriptar" style="display: none;">
+                    <textarea class="textarea__desencriptar" name="desencriptar" rows="6"></textarea>
+                    <button class="button__copiar">Copiar</button>
+                </div>
+            </section>
+        </main>
+        <footer>
             Desarrollado por Felipe Rodrigo Andy Carrasco Farfán (2024)
-    </footer>
+        </footer>
+    </div>
     <script></script>
 </body>
 </html>

@@ -16,10 +16,10 @@
             <section class="contenedor__principal__seccion__encriptar" >
                 <textarea class="textarea__encriptar" placeholder="Ingrese el texto aquí" rows="6"></textarea>
                 <div class="division__elementos__encriptados">
-                    <p><img src="./Assets/Group.png" alt="Imagen de signo de exclamación"> Solo letras minúsculas y sin acentos</p>
+                    <p><img class="img__warning" src="./Assets/Group.png" alt="Imagen de signo de exclamación"> Solo letras minúsculas, sin acentos, sin números y caracteres especiales</p>
                     <div class="division__botones__encriptado">
-                        <button class="button__encriptar">Encriptar</button>
-                        <button class="button__desencriptar">Desencriptar</button>
+                        <button class="button__encriptar" onclick="encriptarTexto()">Encriptar</button>
+                        <button class="button__desencriptar" onclick="desencriptarTexto()">Desencriptar</button>
                     </div>
                 </div>
             </section>
@@ -27,13 +27,13 @@
                 <div class="division__elementos__desencriptar" >
                     <img src="./Assets/Muneco.png" alt="Imagen de niño con una lupa">
                     <div class="division__titulo__parrafo__desencriptar">
-                        <h1>Ningún mensaje fue encontrado</h1>
+                        <h1 style="display: none;">Ningún mensaje fue encontrado</h1>
                         <p>Ingresa el texto que deseas encriptar o desencriptar.</p>
                     </div>
                 </div>
                 <div class="division__textarea__boton__desencriptar" style="display: none;">
                     <textarea class="textarea__desencriptar" name="desencriptar" rows="6"></textarea>
-                    <button class="button__copiar">Copiar</button>
+                    <button class="button__copiar" onclick="copiarTextoEncriptado()">Copiar</button>
                 </div>
             </section>
         </main>
@@ -41,6 +41,6 @@
             Desarrollado por Felipe Rodrigo Andy Carrasco Farfán (2024)
         </footer>
     </div>
-    <script></script>
+    <script src="./Js/app.js" ></script>
 </body>
 </html>

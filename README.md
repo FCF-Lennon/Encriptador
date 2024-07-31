@@ -1,6 +1,6 @@
 # Encriptador de Texto
 
-![imagen de la pagina web](./Assets/Logo.png)
+![imagen de la pagina web](./Assets/fullscreen.png)
 
 Este proyecto es una aplicación web simple que permite encriptar y desencriptar texto. Utiliza un conjunto de reglas específicas para transformar vocales en combinaciones de letras, es un challenger desarrollado en Oracle One - Alura Latam.
 

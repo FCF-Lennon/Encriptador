@@ -1,31 +1,52 @@
-function selectorElementoHTML (elemento) {
+
+// rutas de las clases en css
+const rutaBotonEncriptar = ".button__encriptar";
+const rutaBotonDesencriptar = ".button__desencriptar";
+const rutaBotonCopiar = ".button__copiar";
+const rutaWarningUno = ".division__elementos__encriptados>p";
+const rutaWarningDos = ".division__titulo__parrafo__desencriptar>h1";
+const rutaImagenWarning = ".img__warning";
+const rutaSeccionUnoDesencriptar = ".division__elementos__desencriptar";
+const rutaSeccionDosDesencriptar = ".division__textarea__boton__desencriptar";
+const rutaTextareaEncriptar = ".textarea__encriptar";
+const rutaTextareaDesencriptar = ".textarea__desencriptar";
+
+// optener elementos
+const warningUno = selectorElementoHtml(rutaWarningUno);
+const warningDos = selectorElementoHtml(rutaWarningDos);
+const imagenWarning = selectorElementoHtml(rutaImagenWarning);
+const textareaEncriptar = selectorElementoHtml(rutaTextareaEncriptar);
+const textareaDesencriptar = selectorElementoHtml(rutaTextareaDesencriptar);
+const seccionUnoDesencriptar = selectorElementoHtml(rutaSeccionUnoDesencriptar);
+const seccionDosDesencriptar = selectorElementoHtml(rutaSeccionDosDesencriptar);
+const botonCopiar = selectorElementoHtml(rutaBotonCopiar);
+
+
+function selectorElementoHtml (elemento) {
     return document.querySelector(elemento);
 }
 
 function mostrarWarning (elemento) {
 
-    // asignamos el elemento  a una variable como buena practica 
-    // para acceder una sola ves al elemento
-    const etiqueta = selectorElementoHTML(elemento);
+    const etiqueta = selectorElementoHtml(elemento);
     etiqueta.style.color = "red";
 
-    if (elemento === warningDos) {
+    if (elemento === rutaWarningDos) {
         etiqueta.style.display = "flex";
     } else {
-        selectorElementoHTML(imagenWarning).style.filter = 'invert(26%) sepia(90%) saturate(7481%) hue-rotate(-7deg)';
+        imagenWarning.style.filter = 'invert(26%) sepia(90%) saturate(7481%) hue-rotate(-7deg)';
     } 
 }
 
 function validarTexto() {
     
-    const patron = /[A-ZÁÉÍÓÚÜÑáéíóúüñ0-9!@#$%^&*()_+{}\[\]:;<>,.?~`´¨]/u;
-    const capturarElementoTextarea = selectorElementoHTML(textareaEncriptar);
-    const capturarTexto = capturarElementoTextarea.value;
+    const patron = /[A-ZÁÉÍÓÚÜÑáéíóúü0-9!@#$%^&*()_+{}\[\]:;<>,.?~`´¨]/u;
+    const capturarTexto = textareaEncriptar.value;
 
     if (patron.test(capturarTexto)) {
-        mostrarWarning(warningUno);
+        mostrarWarning(rutaWarningUno);
     } else if (capturarTexto === "") {
-        mostrarWarning(warningDos);
+        mostrarWarning(rutaWarningDos);
     } else {
         return capturarTexto;
     }
@@ -48,8 +69,7 @@ function encriptarTexto () {
         for (let letra of textoValidado) {
             textoEncriptado += reglaEncriptado[letra] || letra;
         }
-
-        console.log(textoEncriptado);
+        mostrarTextoEncriptado(textoEncriptado);
         return textoEncriptado;
     } 
 
@@ -57,36 +77,110 @@ function encriptarTexto () {
 
 }
 
-function limpiar () {
-
-    selectorElementoHTML(warningUno).style.color = "var(--color-cuaternario)";
-    selectorElementoHTML(imagenWarning).style.filter = "none"; 
-    selectorElementoHTML(warningDos).style.color = "var(--color-cuaternario)";
-    selectorElementoHTML(warningDos).style.display = "none";
-    selectorElementoHTML(seccionDosDesencriptar).style.display = "none";
+function verificarTextoEncriptado () {
+    const reglasCifrado = ["ai", "enter", "imes", "ober", "ufat"]
+    for (const patron of reglasCifrado) {
+        if (textareaEncriptar.value.includes(patron)) {
+            return true;
+        }
+    }
+    return false;
 }
 
-const botonEncriptar = ".button__encriptar";
-const botonDesencriptar = ".button__desencriptar";
-const botonCopiar = ".button__copiar";
-const warningUno = ".division__elementos__encriptados>p";
-const warningDos = ".division__titulo__parrafo__desencriptar>h1";
-const imagenWarning = ".img__warning";
-const seccionUnoDesencriptar = ".division__elementos__desencriptar";
-const seccionDosDesencriptar = ".division__textarea__boton__desencriptar";
-const textareaEncriptar = ".textarea__encriptar";
-const textareaDesencriptar = ".textarea__desencriptar";
+function mostrarTextoEncriptado (texto) {
+    textareaDesencriptar.value = texto;
+    seccionUnoDesencriptar.style.display = "none";
+    seccionDosDesencriptar.style.display = "flex";
+}
 
+function copiarTextoEncriptado () {
+    let origenTexto = textareaDesencriptar.value;
+    let elementoBotonCopiar = botonCopiar;
+    let copiarTextoEncriptado = navigator.clipboard.writeText(origenTexto);
+    
+    copiarTextoEncriptado.then(() => {
+        elementoBotonCopiar.textContent = "Texto Copiado!";
+        elementoBotonCopiar.style.color = "red";
+        elementoBotonCopiar.style.borderColor = "red";
+        textareaEncriptar.value = "";
+        setTimeout(() => {
+            elementoBotonCopiar.textContent = "Copiar";
+            elementoBotonCopiar.style.color = "var(--color-cuaternario)";
+            elementoBotonCopiar.style.borderColor = "var(--color-terciario)";
+        }, 2500);
+    }).catch(err => {
+        console.error("Error al copiar desde el portapapeles: ", err);
+    })
+}
 
-selectorElementoHTML(botonDesencriptar).addEventListener ('click', () => {
-    if (selectorElementoHTML(textareaEncriptar).value === "") {
-        mostrarWarning(warningDos);
+function desencriptarTexto () {
+    
+    let textoValido = validarTexto();
+    let textoEncriptado = textareaEncriptar.value;
+    let textoDesencriptado = textoEncriptado;
+    const reglaDesencriptado = [
+        {encriptado: 'ai', desencriptado: 'a'},
+        {encriptado: 'enter', desencriptado: 'e'},
+        {encriptado: 'imes', desencriptado: 'i'},
+        {encriptado: 'ober', desencriptado: 'o'},
+        {encriptado: 'ufat', desencritptado: 'u'}
+    ];
+
+    if (textoEncriptado.length > 0 && textoValido !== undefined) {
+
+        if (verificarTextoEncriptado() || textareaEncriptar.value === textareaDesencriptar.value) {
+            for (let regla of reglaDesencriptado) {
+                textoDesencriptado = textoDesencriptado.split(regla.encriptado).join(regla.desencriptado);
+            }
+            textareaEncriptar.style.color = "red";
+            setTimeout(() => {
+                textareaEncriptar.style.color = "var(--color-terciario)";
+            }, 2500);
+            textareaEncriptar.value = textoDesencriptado;
+        } else {
+            warningDos.textContent = "El texto ingresado no esta encriptado";
+            warningDos.style.color= "red";
+            warningDos.style.display = "flex";
+            seccionDosDesencriptar.style.display = "none";
+            seccionUnoDesencriptar.style.display = "flex";
+        }
+    } 
+
+    return;
+}
+
+function limpiar () {
+    warningUno.style.color = "var(--color-cuaternario)";
+    imagenWarning.style.filter = "none"; 
+    warningDos.style.color = "var(--color-cuaternario)";
+    warningDos.style.display = "none";
+    warningDos.textContent = "Ningún mensaje fue encontrado"
+    seccionUnoDesencriptar.style.display = "flex";
+    seccionDosDesencriptar.style.display = "none";
+}
+
+selectorElementoHtml(rutaBotonEncriptar).addEventListener ('click', () => {
+    if (textareaEncriptar.value === "") {
+        if (seccionDosDesencriptar.style.display) {
+            seccionDosDesencriptar.style.display = "none";
+            seccionUnoDesencriptar.style.display = "flex";
+        }
+        mostrarWarning(rutaWarningDos);
     }
 }); 
 
-selectorElementoHTML(textareaEncriptar).addEventListener ('input', () => {
-    if (selectorElementoHTML(warningUno).style.color == "red" || selectorElementoHTML(warningDos).style.color == "red") {
-        console.log('paso por testarea');
+selectorElementoHtml(rutaBotonDesencriptar).addEventListener ('click', () => {
+    if (textareaEncriptar.value === "") {
+        if (seccionDosDesencriptar.style.display) {
+            seccionDosDesencriptar.style.display = "none";
+            seccionUnoDesencriptar.style.display = "flex";
+        }
+        mostrarWarning(rutaWarningDos);
+    }
+}); 
+
+selectorElementoHtml(rutaTextareaEncriptar).addEventListener ('input', () => {
+    if (warningUno.style.color == "red" || warningDos.style.color == "red") {
         limpiar();
     }
 });

@@ -35,7 +35,7 @@ Este proyecto es una aplicación web simple que permite encriptar y desencriptar
 
 Para usar este proyecto localmente:
 
-1. Clona el repositorio: `git clone https://fcf-lennon.github.io/Encriptador/`
+1. Clona el repositorio: `git clone https://github.com/FCF-Lennon/Encriptador`
 2. Navega al directorio del proyecto: `cd encriptador-de-texto`
 3. Abre `index.html` en tu navegador.
 

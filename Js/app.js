@@ -40,15 +40,15 @@ function mostrarWarning (elemento) {
 
 function validarTexto() {
     
-    const patron = /[A-ZÁÉÍÓÚÜÑáéíóúü0-9!@#$%^&*()_+{}\[\]:;<>,.?~`´¨]/u;
+    const patron = /^[a-zñ\s]+$/;
     const capturarTexto = textareaEncriptar.value;
 
     if (patron.test(capturarTexto)) {
-        mostrarWarning(rutaWarningUno);
+        return capturarTexto;
     } else if (capturarTexto === "") {
         mostrarWarning(rutaWarningDos);
     } else {
-        return capturarTexto;
+        mostrarWarning(rutaWarningUno);
     }
         
 }

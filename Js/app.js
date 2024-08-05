@@ -1,4 +1,3 @@
-
 // rutas de las clases en css
 const rutaBotonEncriptar = ".button__encriptar";
 const rutaBotonDesencriptar = ".button__desencriptar";

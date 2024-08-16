@@ -1,3 +1,4 @@
+
 // rutas de las clases en css
 const rutaBotonEncriptar = ".button__encriptar";
 const rutaBotonDesencriptar = ".button__desencriptar";
@@ -77,7 +78,7 @@ function encriptarTexto () {
 }
 
 function verificarTextoEncriptado () {
-    const reglasCifrado = ["ai", "enter", "imes", "ober", "ufat"]
+    const reglasCifrado = ["enter", "imes", "ai","ober", "ufat"]
     for (const patron of reglasCifrado) {
         if (textareaEncriptar.value.includes(patron)) {
             return true;
@@ -122,7 +123,7 @@ function desencriptarTexto () {
         {encriptado: 'enter', desencriptado: 'e'},
         {encriptado: 'imes', desencriptado: 'i'},
         {encriptado: 'ober', desencriptado: 'o'},
-        {encriptado: 'ufat', desencritptado: 'u'}
+        {encriptado: 'ufat', desencriptado: 'u'}
     ];
 
     if (textoEncriptado.length > 0 && textoValido !== undefined) {
